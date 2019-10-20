@@ -14,10 +14,10 @@ spec:
           ports:
             - containerPort: 8080
               protocol: "TCP"
-  replicas: 5 2
+  replicas: 5
   triggers:
-    - type: "ConfigChange" 3
-    - type: "ImageChange" 4
+    - type: "ConfigChange"
+    - type: "ImageChange"
       imageChangeParams:
         automatic: true
         containerNames:
@@ -27,5 +27,5 @@ spec:
           name: "origin-ruby-sample:latest"
   strategy: 5
     type: "Rolling"
-  paused: false 6
-  revisionHistoryLimit: 2 7
+  paused: false
+  revisionHistoryLimit: 2
