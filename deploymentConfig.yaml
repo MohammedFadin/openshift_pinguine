@@ -1,0 +1,31 @@
+kind: "DeploymentConfig"
+apiVersion: "v1"
+metadata:
+  name: "frontend"
+spec:
+  template: 1
+    metadata:
+      labels:
+        name: "frontend"
+    spec:
+      containers:
+        - name: "helloworld"
+          image: "openshift/origin-ruby-sample"
+          ports:
+            - containerPort: 8080
+              protocol: "TCP"
+  replicas: 5 2
+  triggers:
+    - type: "ConfigChange" 3
+    - type: "ImageChange" 4
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - "helloworld"
+        from:
+          kind: "ImageStreamTag"
+          name: "origin-ruby-sample:latest"
+  strategy: 5
+    type: "Rolling"
+  paused: false 6
+  revisionHistoryLimit: 2 7
